@@ -1,0 +1,17 @@
+/* footer.css */
+
+
+/* footer.css */
+
+/* footer.css */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+  .Footer {
+    margin-top: auto;
+    position: fixed; /* Fixed position to keep it at the bottom */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Full width */
+  }
+}

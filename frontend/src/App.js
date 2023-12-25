@@ -39,15 +39,7 @@ const App = () => {
       <NavbarMain isAuthenticated={isAuthenticated} loggedInUser={loggedInUser} handleSignOut={handleSignOut} handleSignIn={handleSignIn} />
     );
   };
-  const renderUserNavBar = () => {
-    if (location.pathname === '/adminhome/:id')
-    {
-        return <UserNavBar/>;
-    
-    }
-   return null;
-   
-  };
+  
 
   const renderCommonFooter = () => {
     if (location.pathname === '/loginpage')

@@ -1,11 +1,13 @@
 import React from "react";
 import { Footer } from "flowbite-react";
 import logo from "../assets/unilogo.png";
+import "../styles/footer.css";
 
 function CommonFooter() {
   return (
     <Footer container className="bg-NeutralBlack text-FooterFont">
-      <div className="w-full">
+      <div className="w-full footer" >
+
         <div className="grid w-full justify-between sm:flex gap-8 sm:justify-between md:flex md:grid-cols-3 md:gap-14 text-left mt-2 mb-2">
           <div className="flex flex-col items-center space-y-4 mb-2 w-3/4 mx-4 my-8">
             <div className="justify-center">
