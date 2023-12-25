@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 const breadcrumb = {
   backgroundColor: "white",
   border: "2px solid rgba(0,0,0,0.125)",
-  borderRadius: "0.37rem"
+  borderRadius: "0.37rem",
+  marginTop: "68px",
+  // Add top margin here
 };
 
 function Breadcrumb(props) {

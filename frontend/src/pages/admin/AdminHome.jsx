@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Carousel } from "flowbite-react";
-import guide from "../assets/guide.png";
-import notice from "../assets/notice.png";
-import budget from "../assets/budget.png";
+import guide from "../../assets/guide.png";
+import notice from "../../assets/notice.png";
+import budget from "../../assets/budget.png";
 
-import VenderList from '../components/VenderList';
-import GuideDiv from "../components/Guide";
-import NoticesDiv from "../components/NoticesDiv";
-import SuppliersDiv from "../components/SuppliersDiv";
-import BudgetGuideNotice from "../components/Budget_Guide_Notice.jsx";
+import VenderList from '../../components/VenderList';
+import GuideDiv from "../../components/Guide";
+import NoticesDiv from "../../components/NoticesDiv";
+import SuppliersDiv from "../../components/SuppliersDiv";
+import BudgetGuideNotice from "../../components/Budget_Guide_Notice.jsx";
+import { UserNavBar } from "../../components/UserNavBar.jsx";
 
 
-function Home() {
+function AdminHome() {
   // const { id } = useParams();
   return (
-    
+   
     <div id="Home">
+     <UserNavBar/>
       <div className="bg-NeutralSilver">
         <div className="px-4 lg:px-14 max-w-screen-2xl mx-auto min-h-screen h-screen">
           <Carousel className="w-full mx-auto ">
@@ -38,6 +40,7 @@ function Home() {
                 <p className="text-NeutralGrey text-base pt-8">
                   Follow the Instructions for operating the procurement
                   management system.
+                  
                 </p>
               </div>
             </div>
@@ -101,4 +104,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default AdminHome;

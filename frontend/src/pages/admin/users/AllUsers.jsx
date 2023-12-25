@@ -33,7 +33,7 @@ const AllUsers = () => {
     <div className="p-4">
       <Breadcrumb
         crumbs={[
-          { label: "Home", link: "/adminhome" },
+          { label: "Home", link: "/adminhome/:id" },
           { label: "User Registered List", link: "/allusers" },
         ]}
         selected={(crumb) => console.log(`Selected: ${crumb.label}`)}

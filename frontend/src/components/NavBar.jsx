@@ -1,16 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; // Import Link from React Router
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+import logo from "../assets/unilogo.png";
+import { FaXmark, FaBars } from "react-icons/fa6";
+import "../styles/Navbar.css";
 import axios from 'axios';
-
+//import "../pages/Home";
 
 export default function NavbarMain({ isAuthenticated, handleSignOut, loggedInUser }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const handleButtonClick = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  // set toggle Menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll); // Change to removeEventListener
+    };
+  }, []); 
+  // Add an empty dependency array to useEffect
+
+  
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -36,211 +62,142 @@ export default function NavbarMain({ isAuthenticated, handleSignOut, loggedInUse
   useEffect(() => {
     console.log("loggedInUser changed:", loggedInUser);
   }, [loggedInUser]);
+  //NAVITEMS ARRAY
+  const navItems = [
+    { link: "Home", path: "Home" },
+    { link: "Guidelines", path: "guidelines" },
+    { link: "Notices", path: "notices" },
+    { link: "Budget", path: "budget" },
+    { link: "Vendors", path: "vendors" },
+    { link: "Events", path: "events" },
+  ];
   return (
-   
-    <div className=" max-w-full">
-      <nav className="bg-black ">
-        <div className=" px-2 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="  absolute inset-y-0 left-0 flex items-center sm:hidden">
-              <button
-                type="button"
-                className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
+    <header className="w-full bg-white md:bg-transparent fixed top-0 left-0 right-0 ${isSticky ? 'sticky' : ''}">
+      <nav
+        className={`py-4 lg:px-14 px-4 ${
+          isSticky
+            ? "sticky top-0 left-0 right-0 border-b bg-sky-900 duration-300"
+            : "sticky top-0 left-0 right-0 border-b bg-sky-950  duration-300"
+        }`}
+        
+      >
+        <div className="flex justify-between items-center text-base gap-8">
+          <a
+            href="/"
+            className="text-2xl font-semibold flex items-center space-x-3"
+          >
+            <span className="text-[#2194F3]">ENG</span>
+            <img
+              src={logo}
+              alt=" "
+              className="w-10 inline-block item-center "
+            />
+            <span className="text-[#2194F3]">PMS</span>
+          </a>
+
+          {/* Nav bar items for large devices */}
+          <ul className="md:flex space-x-12 hidden">
+            {navItems.map(({ link, path }) => (
+              <ScrollLink
+                to={path}
+                spy={true}
+                smooth={true}
+                offset={-100}
+                key={path}
+                className="block text-base text-gray900 hover:text-brandPrimary first:font-medium cursor-pointer"
               >
-                <span className="absolute -inset-0.5"></span>
-                <span className="sr-only">Open main menu</span>
+                {link}
+              </ScrollLink>
+            ))}
+          </ul>
+          <div className="space-x-12 hidden lg:flex items-center">
+         
+                <Link 
+               to="/"
 
-                <svg
-                  className="block h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
-
-                <svg
-                  className="hidden h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="flex flex-shrink-0 items-center">
-                <img
-                  className="h-12 w-auto"
-                  src="http://www.eng.ruh.ac.lk/img/unilogo.png"
-                  alt="Your Company"
+                 className="bg-brandPrimary text-white py-2 px-4 transition-all duration-300 rounded hover:bg-neutralDGrey items-center mr-4 inline-block">
+                
+              Sign Out
+              <svg
+                width="9"
+                height="6"
+                viewBox="0 0 9 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="inline-block  ml-3"
+              >
+                <path
+                  d="M6.52435 5.4707L8.24346 3.7516C8.44734 3.54772 8.44734 3.21716 8.24346 3.01328L6.52435 1.29418M8.09055 3.38244L0.433594 3.38244"
+                  stroke="white"
+                  stroke-width="1.3"
                 />
-              </div>
-            
-                <div className="text-white text-center flex-grow"> 
-                  <h1 className="text-lg">Faculty of Engineering</h1>
-                  <h1 className="text-lg">University of Ruhuna</h1>
-                </div>
-              
-                <div className="hidden sm:ml-6 sm:flex items-center">
-  <div className="flex space-x-4">
-    <a
-      href="#"
-      className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-      aria-current="page"
-    >
-      Home
-    </a>
+              </svg>
+            </Link>
+             
+          </div>
 
-    {/* You can uncomment and modify other menu items as needed */}
-    {/* <a
-      href="#"
-      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-    >
-      Projects
-    </a> */}
-
-    <a
-      href="/loginpage"
-      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium flex items-center"
-    >
-      <span className="mx-auto">Sign in</span>
-    </a>
-  </div>
-</div>
-
-            </div>
-            <div className="absolute inset-y-0 p-5 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <button
-                type="button"
-                className="relative rounded-full bg-gray-800 p-2 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-              >
-                <span className="absolute -inset-1.5"></span>
-                <span className="sr-only">View notifications</span>
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-                  />
-                </svg>
-              </button>
-              <div className="ml-2"></div>
-              <div className="relative ml-3 p-1">
-                <div>
-                  <button
-                    type="button"
-                    className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    id="user-menu-button"
-                    aria-expanded={isDropdownOpen}
-                    aria-haspopup="true"
-                    onClick={handleButtonClick}
-                  >
-                    <span className="absolute -inset-1.5"></span>
-                    <span className="sr-only">Open user menu</span>
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
-                  </button>
-                </div>
-
-                {isDropdownOpen && (
-                  <div
-                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="user-menu-button"
-                    tabIndex="-1"
-                  >
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700"
-                      role="menuitem"
-                      tabIndex="-1"
-                      id="user-menu-item-0"
-                    >
-                      Your Profile
-                    </a>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700"
-                      role="menuitem"
-                      tabIndex="-1"
-                      id="user-menu-item-1"
-                    >
-                      Settings
-                    </a>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700"
-                      role="menuitem"
-                      tabIndex="-1"
-                      id="user-menu-item-2"
-                    >
-                      Sign in
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
+          {/*menu btn for only mobile devices */}
+          <div className="md:hidden">
+            <svg
+              className="inline-block  h-6 w-6 mr-4 mb-4 ml-4 text-brandPrimary cursor-pointer"
+              viewBox="0 0 20 22"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 15V17C6 19.2091 7.79086 21 10 21H15C17.2091 21 19 19.2091 19 17V5C19 2.79086 17.2091 1 15 1H10C7.79086 1 6 2.79086 6 5V7"
+                stroke="#2194F3"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
+              <path
+                d="M11 14L13.2929 11.7071C13.6834 11.3166 13.6834 10.6834 13.2929 10.2929L11 8"
+                stroke="#2194F3"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              />
+              <path
+                d="M13 11L1 11"
+                stroke-width="2.5"
+                stroke="#2194F3"
+                stroke-linecap="round"
+              />
+            </svg>
+            <button
+              onClick={toggleMenu}
+              className=" text-brandPrimary focus:outline-none focus:text-brandPrimary "
+            >
+              {isMenuOpen ? (
+                <FaXmark className="h-6 w-6 items-center " />
+              ) : (
+                <FaBars className="h-6 w-6 items-center" />
+              )}
+            </button>
           </div>
         </div>
 
-        <div className="sm:hidden" id="mobile-menu">
-          <div className="space-y-1 px-2 pb-3 pt-2">
-            <a
-              href="#"
-              className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
-              aria-current="page"
+        {/*nav items for mobile devices */}
+        <div
+          className={`space-y-4 px-4 mt-16  py-7 bg-brandPrimary md:hidden ${
+            isMenuOpen ? "block fixed top-6 right-0 left-0" : "hidden"
+          }`}
+        >
+          {navItems.map(({ link, path }) => (
+            <ScrollLink
+              to={path}
+              spy={true}
+              smooth={true}
+              offset={-100}
+              key={path}
+              onClick={closeMenu}
+              className="block  cursor-pointer text-base text-white   hover:text-black first:font-medium"
             >
-              Home
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-            >
-              sign in
-            </a>
-            {/* <a
-              href="#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-            >
-              Projects
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-            >
-              Calendar
-            </a> */}
-          </div>
+              {link}
+            </ScrollLink>
+          ))}
         </div>
       </nav>
-      </div>
-      
+    </header>
   );
 }
+

@@ -110,7 +110,7 @@ const AddVendors = () => {
     <div className="app-container p-8 rounded border border-gray-200">
       <Breadcrumb
         crumbs={[
-          { label: "Home", link: "/adminhome" },
+          { label: "Home", link: "/adminhome/:id" },
           { label: "Suppliers Data List", link: "/allvendors" },
           { label: "Supplier Registatrion", link: "/addvendors" },
         ]}
@@ -199,6 +199,21 @@ const AddVendors = () => {
           </div>
           <div>
             <label
+              htmlFor="faxNumber"
+              className="text-sm text-gray-700 block mb-1 font-medium"
+            >
+              Fax Number
+            </label>
+            <input
+              type="text"
+              value={faxNumber}
+              onChange={(e) => setFaxNumber(e.target.value)}
+              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+              placeholder="Enter your fax number"
+            />
+          </div>
+          <div>
+            <label
               htmlFor="contactNumber"
               className="text-sm text-gray-700 block mb-1 font-medium"
             >
@@ -274,21 +289,7 @@ const AddVendors = () => {
               </button>
             )}
           </div>
-          <div>
-            <label
-              htmlFor="faxNumber"
-              className="text-sm text-gray-700 block mb-1 font-medium"
-            >
-              Fax Number
-            </label>
-            <input
-              type="text"
-              value={faxNumber}
-              onChange={(e) => setFaxNumber(e.target.value)}
-              className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-              placeholder="Enter your fax number"
-            />
-          </div>
+      
           <div>
             <label
               htmlFor="rtypeofBusiness"
@@ -335,7 +336,7 @@ const AddVendors = () => {
         </div>
 
         <div className="space-x-4 mt-8 text-center">
-          <button className="button-56" role="button">
+          <button className="button-71" role="button">
             Save
           </button>
         </div>

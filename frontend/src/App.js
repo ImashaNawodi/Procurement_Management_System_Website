@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
-import NavBar from './components/NavBar';
 import reportWebVitals from './reportWebVitals';
 import CreateUsers from './pages/admin/users/CreateUsers.jsx';
 import UpdateUsers from './pages/admin/users/UpdateUsers.jsx';
 import AllUsers from './pages/admin/users/AllUsers.jsx';
-import { AdminHome } from './pages/admin/users/AdminHome.jsx';
+import AdminHome  from './pages/admin/AdminHome.jsx';
 import DeleteUsers from './pages/admin/users/Delete.jsx';
 import PreviewUser from './pages/admin/users/PreviewUser.jsx';
 import AllVendors from  './pages/admin/vendors/AllVendors.jsx';
@@ -16,12 +15,17 @@ import DeleteVendor from './pages/admin/vendors/DeleteVendors.jsx';
 import PreviewVendor from './pages/admin/vendors/PreviewVendors.jsx';
 import UpdateVendor from './pages/admin/vendors/UpdateVendors.jsx';
 import CommonFooter from './components/CommonFooter.jsx';
+import Navbar from './components/NavBar';
+import { useNavigate } from "react-router-dom";
+
 import NavbarMain from './components/NavBarMain';
-
-
+import { UserNavBar } from './components/UserNavBar.jsx';
 const App = () => {
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
   const location = useLocation();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const renderNavbar = () => {
     if (location.pathname === '/admin/:id' || location.pathname === '/loginpage' ||location.pathname === '/department')
     {
@@ -29,8 +33,22 @@ const App = () => {
     
     }
   
-    return <NavbarMain sAuthenticated={isAuthenticated} loggedInUser={loggedInUser} handleSignOut={handleSignOut} handleSignIn={handleSignIn}/>;
-  }
+    return isAuthenticated ? (
+      <Navbar handleSignOut={handleSignOut} />
+    ) : (
+      <NavbarMain isAuthenticated={isAuthenticated} loggedInUser={loggedInUser} handleSignOut={handleSignOut} handleSignIn={handleSignIn} />
+    );
+  };
+  const renderUserNavBar = () => {
+    if (location.pathname === '/adminhome/:id')
+    {
+        return <UserNavBar/>;
+    
+    }
+   return null;
+   
+  };
+
   const renderCommonFooter = () => {
     if (location.pathname === '/loginpage')
     {
@@ -40,12 +58,12 @@ const App = () => {
   
     return <CommonFooter />;
   }
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  
 
   const handleSignIn = (user) => {
     setIsAuthenticated(true);
     setLoggedInUser(user);
+    navigate("/");
   };
 
   const handleSignOut = () => {
@@ -68,8 +86,7 @@ const App = () => {
             )
           }
         />
-         <Route path="/adminhome/:id" element={<AdminHome />} />
-        <Route path="/createusers" element={<CreateUsers />} />
+<Route path="/adminhome/:id" element={<AdminHome isAuthenticated={isAuthenticated} loggedInUser={loggedInUser} handleSignOut={handleSignOut} handleSignIn={handleSignIn} />} />        <Route path="/createusers" element={<CreateUsers />} />
         <Route path="/updateusers/:id" element={<UpdateUsers />} />
         <Route path="/deleteusers/:id" element={<DeleteUsers />} />
         <Route path="/allusers" element={<AllUsers />} />

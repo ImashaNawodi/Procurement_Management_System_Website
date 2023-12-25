@@ -16,7 +16,7 @@ const itemRouter = require('./routes/item');
 const guidanceRouter = require('./routes/guidanceDoc');
 
 
-const PORT = process.env.PORT || 8003;
+const PORT = process.env.PORT || 8000;
 
 
 
