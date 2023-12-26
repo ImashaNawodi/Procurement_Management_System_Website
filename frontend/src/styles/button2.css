@@ -7,10 +7,10 @@
   cursor: pointer;
   display: inline-block;
   font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-  font-size: 14px; /* Reduce font size for a smaller button */
+  font-size: 12px; /* Reduce font size for a smaller button */
   font-weight: 600;
   outline: 0;
-  padding: 12px 16px; /* Reduce padding for a smaller button */
+  padding: 2px 16px; /* Reduce padding for a smaller button */
   position: relative;
   text-align: center;
   text-decoration: none;

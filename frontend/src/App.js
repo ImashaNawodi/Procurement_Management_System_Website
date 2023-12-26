@@ -17,9 +17,10 @@ import UpdateVendor from './pages/admin/vendors/UpdateVendors.jsx';
 import CommonFooter from './components/CommonFooter.jsx';
 import Navbar from './components/NavBar';
 import { useNavigate } from "react-router-dom";
-
+import Form from './pages/Form';
 import NavbarMain from './components/NavBarMain';
 import { UserNavBar } from './components/UserNavBar.jsx';
+
 const App = () => {
   const navigate = useNavigate(); // Initialize the useNavigate hook
 
@@ -27,7 +28,7 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const renderNavbar = () => {
-    if (location.pathname === '/admin/:id' || location.pathname === '/loginpage' ||location.pathname === '/department')
+    if (location.pathname === '/admin/:id' || location.pathname === '/loginpage' ||location.pathname === '/form')
     {
         return null;
     
@@ -42,7 +43,7 @@ const App = () => {
   
 
   const renderCommonFooter = () => {
-    if (location.pathname === '/loginpage')
+    if (location.pathname === '/loginpage'  || location.pathname === '/form')
     {
         return null;
     
@@ -83,6 +84,7 @@ const App = () => {
         <Route path="/deleteusers/:id" element={<DeleteUsers />} />
         <Route path="/allusers" element={<AllUsers />} />
         <Route path="/previewuser/:id" element={<PreviewUser />} />
+        <Route path="/form" element={<Form/>} />
 
         <Route path="/allvendors" element={<AllVendors />} />
         <Route path='/addvendors' element={<AddVendors/>} />

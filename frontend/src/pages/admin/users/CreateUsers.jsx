@@ -1,6 +1,5 @@
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import React, { useState } from "react";
-import Spinner from "../../../components/Spinner";
+import React, { useState, useEffect } from "react";import Spinner from "../../../components/Spinner";
 import axios from "axios";
 import "../../../styles/Scroller.css";
 import "../../../styles/button.css";
@@ -17,6 +16,8 @@ const CreateUsers = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showFullName, setShowFullName] = useState(true);
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const roles = [
     "admin",
     "procurement Officer",
@@ -25,7 +26,28 @@ const CreateUsers = () => {
     "approver",
   ];
   const departments = ["DCEE", "DEIE", "MENA", "MME", "IS", "NONE"];
+  const [headingFontSize, setHeadingFontSize] = useState("3xl");
+  const [labelMargin, setLabelMargin] = useState("mb-1");
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenHeight(window.innerHeight);
+      if (window.innerHeight < 768) {
+        setHeadingFontSize("xl");
+        setLabelMargin("mb-0.3");
+        setShowFullName(false); // Hide Full Name and Last Name when height is less than 768
+      } else {
+        setHeadingFontSize("3xl");
+        setLabelMargin("mb-1");
+        setShowFullName(true); // Show Full Name and Last Name when height is 768 or more
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   function handleSaveCreateUsers(e) {
     e.preventDefault();
 
@@ -75,11 +97,13 @@ const CreateUsers = () => {
         selected={(crumb) => console.log(`Selected: ${crumb.label}`)}
       />
 
-      <h1 class="font-medium text-3xl">User Registration</h1>
-      {loading ? <Spinner /> : ""}
+
+<h1 className={`font-medium text-${headingFontSize} mt-0.5`}>User Registration</h1>
+
+    {loading ? <Spinner /> : ""}
 
       <form onSubmit={handleSaveCreateUsers}>
-        <div class="mt-8 grid lg:grid-cols-2 gap-4">
+        <div class="mt-2 grid lg:grid-cols-2 gap-4">
           <div>
             <label
               for="role"
@@ -122,36 +146,66 @@ const CreateUsers = () => {
               ))}
             </select>
           </div>
-          <div>
-            <label
-              for="firstname"
-              class="text-sm text-gray-700 block mb-1 font-medium"
-            >
-              First Name
-            </label>
-            <input
-              type="text"
-              value={firstname}
-              onChange={(e) => setFirstName(e.target.value)}
-              class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-              placeholder="Enter your first name"
-            />
-          </div>
-          <div>
-            <label
-              for="Lastname"
-              class="text-sm text-gray-700 block mb-1 font-medium"
-            >
-              Last Name
-            </label>
-            <input
-              type="text"
-              value={lastname}
-              onChange={(e) => setLastName(e.target.value)}
-              class="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
-              placeholder="Enter your name"
-            />
-          </div>
+         
+          {window.innerWidth < 768 ? (
+            <div>
+              <label
+                htmlFor="fullname"
+                className="text-sm text-gray-700 block mb-1 font-medium"
+              >
+                Full Name
+              </label>
+              <div className="flex">
+                <input
+                  type="text"
+                  value={firstname}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                  placeholder="First Name"
+                />
+                <input
+                  type="text"
+                  value={lastname}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="ml-2 bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                  placeholder="Last Name"
+                />
+              </div>
+            </div>
+          ) : (
+            <>
+              <div>
+                <label
+                  htmlFor="firstname"
+                  className="text-sm text-gray-700 block mb-1 font-medium"
+                >
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  value={firstname}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                  placeholder="Enter your first name"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="Lastname"
+                  className="text-sm text-gray-700 block mb-1 font-medium"
+                >
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  value={lastname}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
+                  placeholder="Enter your name"
+                />
+              </div>
+            </>
+          )}
 
           <div>
             <label
@@ -218,7 +272,7 @@ const CreateUsers = () => {
         </div>
 
 
-        <div class="space-x-4 mt-8 text-center">         
+        <div class="space-x-4 mt-8 text-center mt-2">         
        
         <button class="button-71" role="button">Save</button>   
              </div>
