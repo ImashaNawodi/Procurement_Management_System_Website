@@ -1,16 +1,13 @@
-// ... (other imports)
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import Spinner from "../../../components/Spinner";
 import { useNavigate } from "react-router-dom";
 
+import "../../../styles/button2.css";
 
-// ... (other imports)
 
 export default function PreviewUser() {
   const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -40,40 +37,17 @@ export default function PreviewUser() {
       <section id="content">
         <main>
           <div className="p-4">
-            {loading ? (
-              <Spinner />
-            ) : (
+            
               <div className="min-h-screen flex items-center justify-center px-4">
                 <div
-                  className="max-w-2xl mx-auto bg-white w-full rounded-lg shadow-xl p-8"
+                  className="max-w-2xl mx-auto  bg-white w-full rounded-lg shadow-xl p-8"
                   style={{ border: "4px solid #3490dc" }}
                 >
-                  <div className="p-4 border-b">
+                  <div className="p-3 border-b">
                     <h1 className="font-medium text-2xl">User Details</h1>
                     <p className="text-sm text-gray-500">
                       Registration details of users.
-                      <button
-                        type="button"
-                        onClick={handleClose}
-                        className="fixed top-10 right-24 bg-red-700 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-700 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                      >
-                        <span className="sr-only">Close menu</span>
-                        <svg
-                          className="h-6 w-6"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          aria-hidden="true"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </button>
+                    
                     </p>
                   </div>
                   <div>
@@ -183,11 +157,22 @@ export default function PreviewUser() {
                         {user.password}
                       </span>
                     </div>
+                    <div class="space-x-4 mt-8 text-center mt-2">         
+                    <button
+                       
+                        onClick={handleClose}
+                        className="button-71"
+                      >
+                      Close
+ 
+   
+                      </button>
+                      </div>
                   </div>
                   </div>
                 </div>
           
-            )}
+            
           </div>
               
         </main>

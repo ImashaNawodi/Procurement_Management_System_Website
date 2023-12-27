@@ -1,4 +1,4 @@
-// ReservationTable.js
+
 
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
@@ -152,6 +152,7 @@ const UserTable = ({ users }) => {
                     </Link>
                     <Link to={`/deleteusers/${user._id}`}>
                       <MdOutlineDelete className="text-2xl text-red-500" />
+                      
                     </Link>
                   </div>
                 </td>

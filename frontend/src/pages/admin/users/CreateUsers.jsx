@@ -1,5 +1,6 @@
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import React, { useState, useEffect } from "react";import Spinner from "../../../components/Spinner";
+import React, { useState, useEffect } from "react";
+
 import axios from "axios";
 import "../../../styles/Scroller.css";
 import "../../../styles/button.css";
@@ -92,15 +93,14 @@ const CreateUsers = () => {
         crumbs={[
           { label: "Home", link: "/adminhome/:id" },
           { label: "User Registered List", link: "/allusers" },
-          { label: "Register New User", link: "/createusers" },
+          { label: "User Registration", link: "/createusers" },
         ]}
         selected={(crumb) => console.log(`Selected: ${crumb.label}`)}
       />
 
-
-<h1 className={`font-medium text-${headingFontSize} mt-0.5`}>User Registration</h1>
-
-    {loading ? <Spinner /> : ""}
+      <h1 className={`font-medium text-${headingFontSize} mt-0.5`}>
+        User Registration
+      </h1>
 
       <form onSubmit={handleSaveCreateUsers}>
         <div class="mt-2 grid lg:grid-cols-2 gap-4">
@@ -125,7 +125,7 @@ const CreateUsers = () => {
               ))}
             </select>
           </div>
-          
+
           <div>
             <label
               for="department"
@@ -146,7 +146,7 @@ const CreateUsers = () => {
               ))}
             </select>
           </div>
-         
+
           {window.innerWidth < 768 ? (
             <div>
               <label
@@ -271,11 +271,11 @@ const CreateUsers = () => {
           </div>
         </div>
 
-
-        <div class="space-x-4 mt-8 text-center mt-2">         
-       
-        <button class="button-71" role="button">Save</button>   
-             </div>
+        <div class="space-x-4 mt-8 text-center mt-2">
+          <button class="button-71" role="button">
+            Save
+          </button>
+        </div>
       </form>
     </div>
   );

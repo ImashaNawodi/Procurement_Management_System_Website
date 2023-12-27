@@ -6,7 +6,6 @@ const breadcrumb = {
   border: "2px solid rgba(0,0,0,0.125)",
   borderRadius: "0.37rem",
   marginTop: "66px",
-  // Add top margin here
 };
 
 function Breadcrumb(props) {

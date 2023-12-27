@@ -10,17 +10,28 @@ import PreviewUserCom from './PreviewUserCom';
 
 const DeleteUsers = () => {
   const [open, setOpen] = useState(true);
+  const cancelButtonRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const { enqueueSnackbar } = useSnackbar();
 
+  const handleOutsideClick = () => {
+    setOpen(false);
+    navigate("/allusers");
+  };
   
   return (
     <div>
       <AllUsers />
       <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={setOpen}>
+      <Dialog
+          as="div"
+          className="fixed inset-0 z-10 overflow-y-auto"
+          initialFocus={cancelButtonRef}
+          onClose={() => handleOutsideClick()} // Use onClose to handle both closing and navigating
+          static // Add the static prop here
+        >   
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

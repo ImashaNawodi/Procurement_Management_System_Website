@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Spinner from "../../../components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
@@ -110,7 +109,7 @@ const UpdateUsers = () => {
         selected={(crumb) => console.log(`Selected: ${crumb.label}`)}
       />
 <h1 className={`font-medium text-${headingFontSize} mt-[-0.5rem]`}>Update details</h1>
-      {loading ? <Spinner /> : ""}
+    
 
       <form onSubmit={handleUpdateUsers}>
         <div className="mt-8 grid lg:grid-cols-2 gap-4">
