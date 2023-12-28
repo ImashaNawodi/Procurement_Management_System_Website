@@ -16,7 +16,7 @@ const VendorTable = ({ supplyers }) => {
       <div class="align-middle rounded-tl-lg rounded-tr-lg inline-block w-full py-4 overflow-hidden bg-white shadow-lg px-12">
         <div class="flex justify-between">
       
-        <div class="input-group rounded mb-4">
+        <div class="p-4 input-group rounded mb-4">
   <input
     type="search"
     class="form-control rounded"

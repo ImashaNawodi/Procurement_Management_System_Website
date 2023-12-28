@@ -112,7 +112,7 @@ const AddVendors = () => {
       <h1 className="font-medium text-2xl">Supplier Registration</h1>
 
       <form onSubmit={handleSaveAddVendors}>
-        <div className="mt-8 grid lg:grid-cols-2 gap-2">
+        <div className="mt-8 grid lg:grid-cols-2 gap-3">
           <div>
             <label
               htmlFor="contactOfficer"
@@ -412,7 +412,7 @@ const AddVendors = () => {
             </>
           )}
         </div>
-        <div className="space-x-4 mt-8 mt-2 text-center">
+        <div className="space-x-4 mt-8  text-center">
           <button className="button-71" role="button">
             Save
           </button>

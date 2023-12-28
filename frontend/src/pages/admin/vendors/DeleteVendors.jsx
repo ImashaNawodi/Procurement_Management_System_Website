@@ -82,25 +82,28 @@ const DeleteVendor = () => {
             >
               <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className="mt-2">
-                  <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <ExclamationTriangleIcon
-                      className="h-6 w-6 text-red-600"
-                      aria-hidden="true"
-                    />
-                  </div>
+                 
                   <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                  <div className="mx-auto flex h-32 w-32 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                          <ExclamationTriangleIcon
+                            className="h-24 w-24 text-red-600"
+                            aria-hidden="true"
+                          />
+                        </div>
                     <Dialog.Title
-                      as="h3"
-                      className="text-base font-semibold leading-6 text-gray-900"
-                    >
-                      Delete Supplyer
+                     as="h1"
+                     className="text-3xl font-bold leading-6 text-black-500"
+                   >
+                     Are you sure?
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        Are you sure you want to delete this supplyer? All of
-                        your data will be permanently removed. This action
-                        cannot be undone.
-                      </p>
+                    <p className="text-xl text-black block">
+                    Are you sure want to delete this vendor?                          
+                            <br />
+                            <span className="text-red-500">
+                            Note : Once you delete this vendor all details of this vendor will be removed from the system{" "}
+                            </span>
+                          </p>
                     </div>
                   </div>
                 </div>

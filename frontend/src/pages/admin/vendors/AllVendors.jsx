@@ -30,7 +30,7 @@ const AllVenders = () => {
   };
 
   return (
-    <div className="p-4">
+<div className="p-4" >
       <Breadcrumb
         crumbs={[
           { label: "Home", link: "/adminhome/:id" },

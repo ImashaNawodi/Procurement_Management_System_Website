@@ -20,6 +20,11 @@ import { useNavigate } from "react-router-dom";
 import Form from './pages/Form';
 import NavbarMain from './components/NavBarMain';
 import { UserNavBar } from './components/UserNavBar.jsx';
+import  DeleteManageNotices  from './pages/admin/notices/DeleteManageNotices.jsx';
+import  ManageNotices  from './pages/admin/notices/ManageNotices.jsx';
+import  UploadNotices from './pages/admin/notices/UploadNotices.jsx';
+import  ManageGuidance  from './pages/admin/guidance/ManageGuidance.jsx';
+import  DeleteGuidance  from './pages/admin/guidance/DeleteGuidance.jsx';
 
 const App = () => {
   const navigate = useNavigate(); // Initialize the useNavigate hook
@@ -92,7 +97,11 @@ const App = () => {
         <Route path="/deletevendor/:id" element={<DeleteVendor/>} />
         <Route path="/previewvendor/:id" element={<PreviewVendor />} />
         <Route path="/updatevendor/:id" element={<UpdateVendor/>} />
-
+        <Route path ="/managenotices" element={<ManageNotices/>}/>
+        <Route path ="/deletenotices" element={<DeleteManageNotices/>}/>
+        <Route path ="/uploadnotices" element={<UploadNotices/>}/>
+        <Route path ="/manageguidance" element={<ManageGuidance/>}/>
+        <Route path ="/deleteguidance" element={<DeleteGuidance/>}/>
       </Routes>
   
   {renderCommonFooter ()}
